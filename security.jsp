@@ -40,8 +40,8 @@
                <p id="hello-msg" class="nav-item nav-link">Hello, user01 &nbsp;&nbsp;&nbsp;</p>
             </div>
             <div class="navbar-nav ml-auto">
-               <a href="/profile/" class="nav-item nav-link"><i class="far fa-address-card"></i>&nbsp;&nbsp;Profile  </a>
-               <a href="/logout/" class="nav-item nav-link"> <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</a>
+               <a href="profile.jsp" class="nav-item nav-link"><i class="far fa-address-card"></i>&nbsp;&nbsp;Profile</a>
+               <a href="index.jsp" class="nav-item nav-link"> <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</a>
             </div>
          </div>
       </nav>
@@ -65,23 +65,52 @@
          background-color: honeydew;
          ">
       <br>
+      
+      <form action="security.jsp" method="get">
+      		<label>Recorded Voice Samples</label> <br>
+				<input list="browsers">
+
+		<datalist id="browsers">
+		  <option value="UserA">
+		  <option value="UserB">
+		  <option value="UserC">
+		</datalist>
+									  <button type="submit" formaction="security.jsp">Record new sample</button>
+							  							  <button type="submit" formaction="security.jsp">Delete sample</button>
+							  
+			</form>
+      
       <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom py-6 ">
          <div class="container-fluid">
             <ul class="navbar-nav mx-auto text-center nav-justified">
-               <li class="nav-item">
-                  <a class="nav-link" href="/"><i class="fas fa-home"></i>Dashboard</a>
+               <form action="dashboard.jsp">
+				 <li class="nav-item">
+                  <a class="nav-link" href="dashboard.jsp"><i class="fas fa-dashboard"></i>Dashboard</a>
                </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="/climate/"><i class="fas fa-percent"></i><br>Humidity</a>
+			   </form>
+               <form action="home.jsp">
+				 <li class="nav-item">
+                  <a class="nav-link" href="home.jsp"><i class="fas fa-home"></i>Home</a>
                </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="/lights/"><i class="fas fa-lightbulb"></i><br>Lights</a>
+			   </form>
+			   <form action="logs.jsp">
+				 <li class="nav-item">
+                  <a class="nav-link" href="logs.jsp"><i class="fas fa-info"></i>Logs</a>
                </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="/logs/"><i class="fas fa-key"></i><br>Logs</a>
+			   </form>
+			   <form action="devices.jsp">
+				 <li class="nav-item">
+                  <a class="nav-link" href="devices.jsp"><i class="fas fa-profile"></i>Device</a>
                </li>
-               <li class="nav-item ">
-                  <a class="nav-link" href="/settings/"><i class="fas fa-cog"></i><br>Settings</a>
+			   </form>
+			   <form action="security.jsp">
+				 <li class="nav-item">
+                  <a class="nav-link" href="security.jsp"><i class="fas fa-unlock-alt"></i>Security</a>
+               </li>
+			   </form>
+			   <form action="setting.jsp">
+				 <li class="nav-item">
+                  <a class="nav-link" href="setting.jsp"><i class="fas fa-book"></i>Setting</a>
                </li>
             </ul>
          </div>

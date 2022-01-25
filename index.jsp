@@ -20,7 +20,7 @@
 			<input type="text" placeholder="Name" id="username"/>
 			<input type="email" placeholder="Email" id="email"/>
 			<input type="password" placeholder="Password" id="password"/>
-			<button>Sign Up</button>
+			<button type="submit" formaction="dashboard.jsp">Sign Up</button>
 		</form>
 	</div>
 	<div class="form-container sign-in-container">
@@ -32,11 +32,12 @@
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
 			<span>or use your account</span>
+			<form action="dashboard.jsp" method="get">
 			<input type="email" placeholder="Email" id="username" />
 			<input type="password" placeholder="Password" id="password" />
 			<a href="#">Forgot your password?</a>
-			<button>Sign In</button>
-		</form>
+			  <button type="submit" formaction="dashboard.jsp">Sign In</button>
+			</form>
 	</div>
 	<div class="overlay-container">
 		<div class="overlay">

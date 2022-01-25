@@ -14,7 +14,7 @@
       <link id="chromealerabat-link" rel="stylesheet" type="text/css" href="chrome-extension://dacdinoicboceafielngnmjjplncljhj/content.css">
    </head>
    <body style="
-      background-position: center center;
+      background-position: centercentert;
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;
@@ -40,17 +40,18 @@
                <p id="hello-msg" class="nav-item nav-link">Hello, user01 &nbsp;&nbsp;&nbsp;</p>
             </div>
             <div class="navbar-nav ml-auto">
-               <a href="/profile/" class="nav-item nav-link"><i class="far fa-address-card"></i>&nbsp;&nbsp;Profile  </a>
-               <a href="/logout/" class="nav-item nav-link"> <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</a>
+               <a href="profile.jsp" class="nav-item nav-link"><i class="far fa-address-card"></i>&nbsp;&nbsp;Profile</a>
+               <a href="index.jsp" class="nav-item nav-link"> <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</a>
             </div>
          </div>
       </nav>
       <br><br>
+      <div class = "function">
       <div class="container">
       <style>
          .my-custom-scrollbar {
-         position: relative;
-         height: 300px;
+         position: center;
+         height: 400px;
          overflow: auto;
          }
          .table-wrapper-scroll-y {
@@ -58,30 +59,206 @@
          }
       </style>
       <div class="item1" style="
-         background-position: center center;
+         background-position: center;
          background-repeat: no-repeat;
          background-attachment: fixed;
          background-size: cover;
          background-color: honeydew;
          ">
+         
       <br>
+            <script>
+        var matching_groups = [];
+        var friends_for_group = [];
+        
+        // TODO: connect with the backend
+        var group_list = [];
+
+        // TODO: connect with the backend
+        var friend_list = ["User D", "User C", "User B", "User A"].sort();
+
+        function join_group(group_index) {
+            // TODO: conect with the backend and join the group
+
+            let b = document.getElementById("search_group_list").children[group_index].children[0];
+            b.disabled = true;
+            b.innerText = "Pending";
+        }
+        
+        function search_group() {
+            let e = null;
+            while (e = document.getElementById("search_group_list").lastChild) {
+                document.getElementById("search_group_list").removeChild(e);
+            }
+
+            // TODO: connect with the backend. Store the names of the matches in the next list.
+            matching_groups = [document.getElementById("group_search").value];
+            for (let i=0 ; i<matching_groups.length ; i++) {
+                if (matching_groups[i].trim().length >= 5){
+                    let p = document.createElement("p");
+                    p.innerText = matching_groups[i];
+
+                    let b = document.createElement("button");
+                    let f = "join_group(" + i + ")";
+                    b.innerText = "Join";
+                    b.setAttribute("onclick", f);
+                    b.setAttribute("style", "float:right;");
+
+                    p.appendChild(b);
+                    document.getElementById("search_group_list").appendChild(p);
+                }
+            }
+
+            // TODO: connect with the backend
+        }
+
+        function add_friend_to_group(i) {
+            current = document.getElementById("div_friend_list").children[i].children[0].textContent; 
+            if (current == "Remove") {
+                var new_list = [];
+                for (let index=0 ; index<friends_for_group.length ; index++) {
+                    if (friends_for_group[index].trim() != document.getElementById("div_friend_list").children[i].textContent.split("Remove")[0].trim()) {
+                        new_list.push(friends_for_group[index]);
+                    }
+                }
+                friends_for_group = new_list;
+                if (new_list.length <= 0) {
+                    document.getElementById("create_group_button").disabled = true;
+                }
+            } else {
+                friends_for_group.push(document.getElementById("div_friend_list").children[i].textContent.split("Add")[0]);
+                document.getElementById("create_group_button").removeAttribute("disabled");
+            }
+            document.getElementById("div_friend_list").children[i].children[0].textContent = document.getElementById("div_friend_list").children[i].children[0].textContent == "Remove" ? "Add" : "Remove";
+        }
+
+        function create_group() {
+            var name = "";
+            while (name == "") {
+                name = prompt("Name for the group: ");
+            }
+
+
+            // TODO : connect with the backend, create the group
+            
+            for (var i=1 ; i<document.getElementById("div_friend_list").children.length ; i++) {
+                document.getElementById("div_friend_list").children[i].children[0].textContent = "Add";
+            }
+
+            friends_for_group = [];
+            
+            // show new group in group list (only if successfull)
+            if (true) {
+                let p = document.createElement("p");
+                p.innerText = name;
+                let b1 = document.createElement("button");
+                let b2 = document.createElement("button");
+                b1.innerText = "Details";
+                b2.innerText = "Call";
+                b2.setAttribute("style", "float:right; margin-left: 5px");
+                b1.setAttribute("style", "float:right;");
+                b1.disabled = true;
+                p.appendChild(b2);
+                p.appendChild(b1);
+                document.getElementById("div_my_groups").appendChild(p);            
+            }
+
+            document.getElementById("create_group_button").disabled = true;
+        }
+
+    </script>
+   
+    <div class="row">
+    	<style>
+		#row { height: 100%; width:100%; font-size: 0; }
+		#left, #middle, #right {display: inline-block; *display: inline; zoom: 1; vertical-align: top; font-size: 12px;}
+		#left {width: 25%; background: blue;}
+		#middle {width: 50%; background: green;}
+		#right {width: 25%; background: yellow;}
+		</style>
+        <div class="left" style="background-color:white;">
+          <h2>Tenants</h2>
+          <div class="inside_div" id="div_my_groups">
+            <script>
+                for (let i=0 ; i<group_list.length ; i++) {
+                    document.write("<p>");
+                    document.write(group_list[i]);
+                    document.write("<button style='float:right; margin-left: 5px' type='button'> Call </button>")
+                    document.write("<button style='float:right;' type='button' disabled> Details </button>")
+                    document.write("</p>");
+                }
+            </script>
+          </div>
+        </div>
+        <div class="middle" style="background-color:white; horizontal-align: middle">
+          <h2>Search Tenants</h2>
+          <div class="inside_div" id="div_friend_list">
+            <script>
+                for (let i=0 ; i<friend_list.length ; i++) {
+                    document.write("<p>");
+                    document.write(friend_list[i]);
+                    let f_str = "add_friend_to_group(" + (i+1) + ")";
+                    document.write("<button style='float:right;' type='button' onclick='" + f_str + "'> Add </button>");
+                    document.write("</p>");
+                }
+            </script>
+          </div>
+          <br>
+          <button type="button" onclick="create_group()" disabled id="create_group_button">Create group</button>
+        </div>
+        <div class="right" style="background-color:white;">
+          <h2>Search groups</h2>
+          <div class="inside_div">
+              <input type="text" placeholder="Search groups" id="group_search" onkeyup="search_group()" style="width:100%;">
+              <div id="search_group_list">
+                <script>
+                </script>
+              </div>
+          </div>
+        </div>
+      </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "500px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+    </div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom py-6 ">
          <div class="container-fluid">
             <ul class="navbar-nav mx-auto text-center nav-justified">
-               <li class="nav-item">
-                  <a class="nav-link" href="/"><i class="fas fa-home"></i>Dashboard</a>
+               <form action="dashboard.jsp">
+				 <li class="nav-item">
+                  <a class="nav-link" href="dashboard.jsp"><i class="fas fa-dashboard"></i>Dashboard</a>
                </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="/climate/"><i class="fas fa-percent"></i><br>Humidity</a>
+			   </form>
+               <form action="home.jsp">
+				 <li class="nav-item">
+                  <a class="nav-link" href="home.jsp"><i class="fas fa-home"></i>Home</a>
                </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="/lights/"><i class="fas fa-lightbulb"></i><br>Lights</a>
+			   </form>
+			   <form action="logs.jsp">
+				 <li class="nav-item">
+                  <a class="nav-link" href="logs.jsp"><i class="fas fa-info"></i>Logs</a>
                </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="/logs/"><i class="fas fa-key"></i><br>Logs</a>
+			   </form>
+			   <form action="devices.jsp">
+				 <li class="nav-item">
+                  <a class="nav-link" href="devices.jsp"><i class="fas fa-profile"></i>Device</a>
                </li>
-               <li class="nav-item ">
-                  <a class="nav-link" href="/settings/"><i class="fas fa-cog"></i><br>Settings</a>
+			   </form>
+			   <form action="security.jsp">
+				 <li class="nav-item">
+                  <a class="nav-link" href="security.jsp"><i class="fas fa-unlock-alt"></i>Security</a>
+               </li>
+			   </form>
+			   <form action="setting.jsp">
+				 <li class="nav-item">
+                  <a class="nav-link" href="setting.jsp"><i class="fas fa-book"></i>Setting</a>
                </li>
             </ul>
          </div>
